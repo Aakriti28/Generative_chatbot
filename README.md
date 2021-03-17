@@ -7,13 +7,13 @@ The canonical seq2seq model became popular in neural machine translation, a task
 
 The algorithm iterates by including the predicted token into the incomplete answer and feeding it back to the right-hand side input layer of the model shown below. 
 
-![alt tag](https://github.com/oswaldoludwig/Seq2seq-Chatbot-for-Keras/blob/master/model_graph.png)
+![alt tag](./model_graph.png)
 
-As can be seen in the figure above, the two LSTMs are arranged in parallel, while the canonical seq2seq has the recurrent layers of encoder and decoder arranged in series. Recurrent layers are unfolded during backpropagation through time, resulting in a large number of nested functions and, therefore, a higher risk of vanishing gradient, which is worsened by the cascade of recurrent layers of the canonical seq2seq model, even in the case of gated architectures such as the LSTMs. I believe this is one of the reasons why my model behaves better during training than the canonical seq2seq.
+As can be seen in the figure above, the two LSTMs are arranged in parallel, while the canonical seq2seq has the recurrent layers of encoder and decoder arranged in series. Recurrent layers are unfolded during backpropagation through time, resulting in a large number of nested functions and, therefore, a higher risk of vanishing gradient, which is worsened by the cascade of recurrent layers of the canonical seq2seq model, even in the case of gated architectures such as the LSTMs. I believe this is one of the reasons why this model behaves better during training than the canonical seq2seq.
 
 The following pseudocode explains the algorithm.
 
-![alt tag](https://github.com/oswaldoludwig/Seq2seq-Chatbot-for-Keras/blob/master/Algorithm.png)
+![alt tag](./Algorithm.png)
 
 The training of this new model converges in few epochs. Using our dataset of 8K training examples, it was required only 100 epochs to reach categorical cross-entropy loss of 0.0318, at the cost of 139 s/epoch running in a GPU GTX980. The performance of this trained model (provided in this repository) seems as convincing as the performance of a vanilla seq2seq model trained on the ~300K training examples of the Cornell Movie Dialogs Corpus, but requires much less computational effort to train.
 
